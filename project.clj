@@ -8,24 +8,26 @@
                  [com.stuartsierra/component "0.3.2"]
                  [ring "1.6.0-RC3"]
                  [aleph "0.4.3"]
-                 [org.clojure/java.jdbc "0.7.0-alpha3"]
-                 [org.postgresql/postgresql "9.4-1201-jdbc41"]
-                 [honeysql "0.8.2"]
+                 [cheshire "5.7.1"]
+                 [pandect "0.6.1"]
+                 [amalloy/ring-gzip-middleware "0.1.3"]
                  [com.cognitect/transit-clj "0.8.300"]
                  [com.cognitect/transit-cljs "0.8.239"]
                  [hiccup "1.0.5"]
                  [rum "0.10.8"]
-                 [org.roman01la/scrum "2.0.0-SNAPSHOT"]]
+                 [org.roman01la/scrum "2.1.0-SNAPSHOT"]
+                 [bidi "2.0.17"]
+                 [kibu/pushy "0.3.7"]]
 
   :plugins [[lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
-  :source-paths ["src"]
+  :source-paths ["src" "../scrum/src"]
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src"]
+                :source-paths ["src" "../scrum/src"]
                 :compiler {:main client.core
-                           :asset-path "js/compiled/out"
+                           :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/bundle.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true}}]}

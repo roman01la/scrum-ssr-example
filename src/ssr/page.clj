@@ -4,6 +4,7 @@
             [cognitect.transit :as t]
             [clojure.data.json :as json]))
 
+;; encode state hash into Transit format
 (defn state->str [state]
   (let [out (ByteArrayOutputStream.)]
     (t/write (t/writer out :json) state)
@@ -14,7 +15,9 @@
     [:head
      [:meta {:charset "utf-8"}]
      [:meta {:name "viewport"
-             :content "width=device-width, initial-scale=1"}]]
+             :content "width=device-width, initial-scale=1"}]
+     [:link {:rel "stylesheet"
+             :href "/css/main.css"}]]
     [:body
      [:div#app content]
      [:script {:src "/js/compiled/bundle.js"}]

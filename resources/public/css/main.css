@@ -1,0 +1,169 @@
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 16px;
+  color: #242424;
+}
+
+h1 {
+  font-weight: 400;
+}
+h2 {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.page-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+.main-nav {
+  background: #fff;
+  padding: 0 16px;
+}
+.main-nav ol {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  height: 44px;
+}
+.logo {
+  margin-right: .6rem;
+}
+.nav-item {
+  height: 100%;
+  display: flex;
+}
+.nav-item.right {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.nav-link {
+  color: #242424;
+  text-decoration: none;
+  text-transform: lowercase;
+  margin: 0 .4rem;
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  overflow: hidden;
+}
+.nav-link::after {
+  display: block;
+  content: "";
+  background: #242424;
+  height: 2px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  transition: transform .3s ease-out;
+  transform: translateY(3px);
+}
+.nav-link.active::after {
+  transform: translateY(0);
+}
+
+.page-footer {
+  padding: 16px 0;
+}
+
+.pagination {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 44px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagination span {
+  margin: 0 16px;
+}
+.pagination a {
+  text-decoration: none;
+  color: #242424;
+}
+.pagination a.disabled {
+  color: #666;
+}
+
+.page-content {
+  max-width: 1000px;
+  margin: 108px auto 0;
+  padding: 0 8px;
+}
+.layout.post .page-content,
+.layout.about .page-content {
+  margin: 52px auto 0;
+}
+
+.article-entry {
+  padding: 8px 0;
+  display: flex;
+  flex-direction: column;
+}
+.article-entry header a {
+ color: #242424;
+ text-decoration: none;
+}
+.article-entry header h2 {
+  margin: 4px 0;
+}
+.article-entry footer {
+  font-size: 12px;
+  color: #666;
+}
+.article-entry footer a {
+ color: #666;
+}
+
+.about-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.about-item {
+  margin: 8px 0 16px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.about-item .label {
+  color: #666;
+  font-size: 12px;
+}
+.about-item .value {
+  margin: 4px 0 0;
+}
+
+.layout.post h1 {
+  margin: 8px 0;
+}
+.layout.post header {
+  margin: 0 0 16px;
+}
+.layout.post .meta a {
+  color: #666;
+  text-decoration: underline;
+}
+
+.comments {
+  margin: 16px 0 0;
+}
+.comments .header {
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 8px;
+}
