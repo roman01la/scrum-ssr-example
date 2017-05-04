@@ -10,8 +10,9 @@
         res
         (assoc res
           :body
-          (let [reconciler (-> (resolvers req) (scrum/reconciler))
-                state (:state reconciler)]
+          (let [state (atom {})
+                reconciler (scrum/reconciler {:state state
+                                              :resolvers (resolvers req)})]
             (-> reconciler
                 (ui-root)
                 (rum/render-html)

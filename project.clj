@@ -5,6 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.521"]
+                 [org.clojure/core.match "0.3.0-alpha4"]
                  [com.stuartsierra/component "0.3.2"]
                  [ring "1.6.0-RC3"]
                  [aleph "0.4.3"]
@@ -15,7 +16,7 @@
                  [com.cognitect/transit-cljs "0.8.239"]
                  [hiccup "1.0.5"]
                  [rum "0.10.8"]
-                 [org.roman01la/scrum "2.1.0-SNAPSHOT"]
+                 [org.roman01la/scrum "2.2.0-SNAPSHOT"]
                  [bidi "2.0.17"]
                  [kibu/pushy "0.3.7"]]
 
@@ -25,7 +26,7 @@
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src" "../scrum/src"]
+                :source-paths ["src"]
                 :compiler {:main client.core
                            :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/bundle.js"
