@@ -1,21 +1,20 @@
-(ns ssr.middleware.rpc
-  (:import (java.io ByteArrayOutputStream))
-  (:require [cognitect.transit :as t]))
+(ns ssr.middleware.rpc)
 
 ;; invoke RPC API methods
 ;; and encode response data into Transit format
 (defn wrap-rpc [handler endpoint rpc]
   (fn [{:keys [uri request-method body] :as req}]
-    (let [res (handler req)]
+    (let [res (handler req)
+          {:keys [jsonrpc id params method]} body]
       (if (and (= uri endpoint)
                (= request-method :post)
-               (contains? body :jsonrpc))
-        (if-let [method (get rpc (:method body))]
-          (let [out (ByteArrayOutputStream.)
-                data (method (:params body))
-                _ (t/write (t/writer out :json) data)]
+               jsonrpc)
+        (if-let [method (get rpc method)]
+          (let [data (method params)]
             (-> res
-                (assoc :body (.toString out))
-                (assoc-in [:headers "Content-Type"] "application/transit+json")))
+                (assoc-in [:headers "Content-Type"] "application/transit+json")
+                (assoc :body {:jsonrpc "2.0"
+                              :id id
+                              :result data})))
           res)
         res))))

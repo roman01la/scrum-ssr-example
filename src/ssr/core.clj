@@ -8,7 +8,7 @@
             [ssr.api :as api]
             [ssr.resolver :refer [resolver]]))
 
-
+;; simple one-time caching per request
 (defn make-resolvers [resolver req]
   (let [cache (volatile! {})]
     (fn [[key & p :as path]]

@@ -5,7 +5,7 @@
             [ssr.middleware.bidi :refer [wrap-bidi]]
             [ssr.middleware.rpc :refer [wrap-rpc]]
             [ssr.middleware.rum :refer [wrap-rum]]
-            [ssr.middleware.transit :refer [wrap-transit-req]]
+            [ssr.middleware.transit :as transit]
             [ssr.middleware.etag :refer [wrap-etag]]))
 
 (defn make-handler []
@@ -23,7 +23,8 @@
           (wrap-rum root-ui resolvers render-page)
           (wrap-bidi routes)
           (wrap-rpc "/api" rpc)
-          (wrap-transit-req)
+          (transit/wrap-transit-res)
+          (transit/wrap-transit-req)
           (wrap-resource "public")
           (wrap-etag)
           (wrap-gzip)

@@ -99,16 +99,24 @@
 (defn- comments [id]
   (let [post (post id)]
     (if (seq (:kids post))
-      (update post :kids (partial pmap comments))
+      (update post :kids (partial map comments))
       post)))
 
 (defn- posts->ids [type]
   (->> (c/parse-string (slurp (str type "-posts.json")) true)
        (map :id)))
 
-;(->> ["top" "new" "show" "ask" "job"]
-;     (map posts->ids)
-;     (apply concat)
+;(def all-ids
+;  (->> ["top" "new" "show" "ask" "job"]
+;       (map posts->ids)
+;       (apply concat)))
+
+;(->> (subvec (vec all-ids) 1000 1177)
+;     (map (fn [id] [(str id) (comments id)]))
+;     (into {})
+;     c/generate-string
+;     (spit "comments_1000-1177.json"))
+
 ;     (pmap (fn [id] [id (comments id)]))
 ;     (into {})
 ;     c/generate-string

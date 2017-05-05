@@ -26,7 +26,4 @@
   (api/post (-> req :ui/route :route-params)))
 
 (defmethod resolver :user [[_ & path] req]
-  (let [user (api/user (-> req :ui/route :route-params))]
-    (match (vec path)
-           [:id] (:id user)
-           :else user)))
+  (api/user (-> req :ui/route :route-params)))
