@@ -6,7 +6,7 @@
         size 20
         from (- (* id size) size)
         to (* id size)]
-    (let [items (into [] (c/parse-string (slurp (str type "-posts.json")) true))]
+    (let [items (into [] (c/parse-string (slurp (str "data/" type "-posts.json")) true))]
       {:from from
        :to to
        :items
@@ -35,12 +35,22 @@
   (-> (posts "job" params)
       (update :items (partial map #(dissoc % :kids)))))
 
-(defn post [{:keys [id]}]
-  (-> (slurp (str "https://hacker-news.firebaseio.com/v0/item/" id ".json"))
+(def comments
+  (-> (slurp "data/comments.json")
       (c/parse-string true)))
+
+(defn post [{:keys [id]}]
+  (let [post (-> (slurp (str "https://hacker-news.firebaseio.com/v0/item/" id ".json"))
+                 (c/parse-string true))]
+    (->> id
+         str
+         keyword
+         (get comments)
+         :kids
+         (assoc post :kids))))
 
 (defn user [{:keys [id]}]
   (let [user
-        (-> (c/parse-string (slurp "users.json") true)
+        (-> (c/parse-string (slurp "data/users.json") true)
             (get (keyword id)))]
     (update user :submitted count)))

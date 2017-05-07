@@ -16,8 +16,6 @@
             [client.controllers.user :as user]
             [client.controllers.post :as post]))
 
-(enable-console-print!)
-
 ;; application state
 (def ^:private state (atom {}))
 
@@ -37,23 +35,24 @@
      :effect-handlers
      {:rpc effects/rpc}}))
 
-;; load controller on navigation change
-(add-watch
-  (scrum/subscription r [:router])
-  :router
-  (fn [_ _ _ {:keys [handler route-params]}]
-    (when-let
-      [ctrl
-       (case handler
-         :top :top-posts
-         :new :new-posts
-         :show :show-posts
-         :ask :ask-posts
-         :jobs :job-posts
-         :user :user
-         :post :post
-         nil)]
-      (scrum/dispatch! r ctrl :load route-params))))
+;; load controller data on navigation change
+(defn- watch-router! []
+  (add-watch
+    (scrum/subscription r [:router])
+    :router
+    (fn [_ _ _ {:keys [handler route-params]}]
+      (when-let
+        [ctrl
+         (case handler
+           :top :top-posts
+           :new :new-posts
+           :show :show-posts
+           :ask :ask-posts
+           :jobs :job-posts
+           :user :user
+           :post :post
+           nil)]
+        (scrum/dispatch! r ctrl :load route-params)))))
 
 (defn render []
   (rum/mount (App r)
@@ -65,4 +64,5 @@
     (doseq [[ctrl init-state] state]
       (scrum/dispatch-sync! r ctrl :init init-state)) ;; init controllers with server state
     (r/start! #(scrum/dispatch! r :router :push %) routes) ;; start router
-    (render)))
+    (render) ;; render the app
+    (watch-router!))) ;; watch route changes to load data on change

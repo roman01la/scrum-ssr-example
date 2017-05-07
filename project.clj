@@ -22,7 +22,7 @@
 
   :plugins [[lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
-  :source-paths ["src" "../scrum/src"]
+  :source-paths ["src"]
 
   :cljsbuild {:builds
               [{:id "dev"

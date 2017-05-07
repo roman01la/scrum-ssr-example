@@ -121,3 +121,25 @@
 ;     (into {})
 ;     c/generate-string
 ;     (spit "comments.json"))
+
+;(defn count-comments- [sum comment]
+;  (let [comments (get comment "kids")]
+;    (if (seq comments)
+;      (+ sum (reduce count-comments- 1 comments))
+;      (inc sum))))
+;
+;(defn count-comments [[id post]]
+;  [id
+;   (reduce count-comments- 0 (get post "kids"))])
+;
+;(def ccount
+;  (->> (slurp "comments.json")
+;       c/parse-string
+;       (map count-comments)
+;       (into {})))
+;
+;(->> (slurp "show-posts.json")
+;     c/parse-string
+;     (map #(assoc % "comments" (get ccount (str (get % "id")))))
+;     c/generate-string
+;     (spit "show-posts.json"))

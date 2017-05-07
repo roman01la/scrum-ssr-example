@@ -6,7 +6,7 @@
   #?(:clj (java.util.Date.)
      :cljs (js/Date.)))
 
-(defn- time-ago [ts]
+(defn time-ago [ts]
   (let [s (-> (get-date) .getTime (- (* ts 1000)) (/ 1000))
         m (int (/ s 60))
         h (int (/ m 60))
@@ -39,7 +39,7 @@
      [:a.disabled "next >"])])
 
 (rum/defc PostItem
-  [{:keys [title url score by id descendants time]}]
+  [{:keys [title url score by id comments time]}]
   [:article.article-entry
    [:header
     [:h2 [:a {:href url} title]]]
@@ -49,7 +49,7 @@
     [:span (str " " (time-ago time) " | ")]
     [:a {:href (str "/item/" id)}
      (cond
-       (nil? descendants) "discuss"
-       (zero? descendants) "discuss"
-       :else (str descendants " comments"))]]])
+       (nil? comments) "discuss"
+       (zero? comments) "discuss"
+       :else (str comments " comments"))]]])
 

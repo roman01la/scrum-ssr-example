@@ -12,6 +12,12 @@ h2 {
   font-weight: 400;
   font-size: 16px;
 }
+pre {
+  overflow: auto;
+  background: #eee;
+  padding: 8px 0;
+  font-size: 14px;
+}
 
 .page-header {
   position: fixed;
@@ -166,4 +172,26 @@ h2 {
   font-size: 14px;
   border-bottom: 1px solid #ccc;
   padding: 0 0 8px;
+}
+
+.comment {
+  margin: 0 0 16px;
+  font-size: 14px;
+}
+.comment .comment {
+  padding: 0 0 0 16px;
+}
+.comment-header {
+  padding: 16px 0 0;
+}
+.comment-header a {
+  color: #666;
+  text-decoration: underline;
+}
+.comment-header .time {
+  font-size: 14px;
+}
+.comment-body {
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 16px;
 }

@@ -11,3 +11,4 @@ pom.xml.asc
 .hg/
 .idea
 *.iml
+resources/public/js/compiled
