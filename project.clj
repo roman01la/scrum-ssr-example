@@ -28,11 +28,13 @@
               [{:id "dev"
                 :source-paths ["src"]
                 :compiler {:main client.core
+                           :preloads [devtools.preload]
                            :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/bundle.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true}}]}
 
   :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]
-                                  [com.stuartsierra/component.repl "0.2.0"]]
+                                  [com.stuartsierra/component.repl "0.2.0"]
+                                  [binaryage/devtools "0.9.4"]]
                    :source-paths ["dev"]}})
