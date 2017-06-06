@@ -1,14 +1,36 @@
-# ssr
+# Hacker News Clone
 
-A Clojure library designed to ... well, that part is up to you.
+## Development
 
-## Usage
+*start web app build*
+```
+lein cljsbuild auto dev
+```
 
-FIXME
+*start server*
+```
+rlwrap lein repl
+(go)
+```
 
-## License
+## Project structure
 
-Copyright © 2017 FIXME
+- `client` — client-side (ClojureScript) only code
+- `ssr` — backend (Clojure) code
+- `ui` — shared UI code (*.cljc)
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+### Client
+
+- `core.cljs` — app initialization
+- `router.cljs` — hooking into HTML5 Hisotry API
+- `effects.cljs` — effects handlers (HTTP)
+- `controllers` — state management logic
+
+### Server
+
+- `core.clj` — app initialization
+- `api.clj` — data retrieval from storage
+- `page.clj` — HTML document template rendering
+- `resolver.clj` — server state retrieval from api
+- `middleware` — Ring middlewares: Transit format encoding/decoding, RPC API server, route matcher, web app renderer and Etag
+- `components` — server components: web server, application
