@@ -1,36 +1,19 @@
 # Hacker News Clone
 
-## Development
+_A web app with server-side rendering and code splitting built with ClojureScript_
 
-*start web app build*
+1. Build ClojureScript from master https://github.com/clojure/clojurescript/wiki/Building-the-compiler
+2. Clone Sablono fork adapted to use React from NPM (`react` branch) https://github.com/roman01la/rum/tree/react
+3. Clone Rum fork adapted to use React from NPM (`react` branch) https://github.com/roman01la/sablono/tree/react
+4. Put them in the same directory with this project
+5. Make sure ClojureScript build version matches the one in `project.clj` here
+5. Build the app
 ```
-lein cljsbuild auto dev
+$ lein cljsbuild once min
 ```
-
-*start server*
+6. Start server
 ```
-rlwrap lein repl
-(go)
+$ rlwrap lein repl
+user=> (go)
 ```
-
-## Project structure
-
-- `client` — client-side (ClojureScript) only code
-- `ssr` — backend (Clojure) code
-- `ui` — shared UI code (*.cljc)
-
-### Client
-
-- `core.cljs` — app initialization
-- `router.cljs` — hooking into HTML5 Hisotry API
-- `effects.cljs` — effects handlers (HTTP)
-- `controllers` — state management logic
-
-### Server
-
-- `core.clj` — app initialization
-- `api.clj` — data retrieval from storage
-- `page.clj` — HTML document template rendering
-- `resolver.clj` — server state retrieval from api
-- `middleware` — Ring middlewares: Transit format encoding/decoding, RPC API server, route matcher, web app renderer and Etag
-- `components` — server components: web server, application
+7. Go to http://localhost:3000
