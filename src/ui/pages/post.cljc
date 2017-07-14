@@ -1,5 +1,6 @@
 (ns ui.pages.post
-  (:require [rum.core :as rum]
+  (:require #?(:cljs [cljs.loader :as loader])
+            [rum.core :as rum]
             [scrum.core :as scrum]
             [ui.base :as base]))
 
@@ -43,7 +44,7 @@
 
 (rum/defc Layout < rum/reactive [r]
   (let [{:keys [descendants loading? kids] :as post}
-        (rum/react (scrum/subscription r [:post]))]
+        (rum/react! (scrum/subscription r [:post]))]
     [:main.layout.post
      (when-not loading?
        [:div.page-content

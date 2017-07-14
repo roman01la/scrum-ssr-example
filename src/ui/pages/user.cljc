@@ -1,5 +1,6 @@
 (ns ui.pages.user
-  (:require [rum.core :as rum]
+  (:require #?(:cljs [cljs.loader :as loader])
+            [rum.core :as rum]
             [scrum.core :as scrum]))
 
 (defn- format-date [ts]
@@ -25,7 +26,7 @@
       value)]])
 
 (rum/defc Layout < rum/reactive [r]
-  (let [user (rum/react (scrum/subscription r [:user]))]
+  (let [user (rum/react! (scrum/subscription r [:user]))]
     [:main.layout
      [:div.page-content
       [:ul.about-list

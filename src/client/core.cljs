@@ -1,8 +1,7 @@
 (ns client.core
-  (:require [rum.core :as rum]
+  (:require [cljs.loader :as loader]
+            [rum.core :as rum]
             [scrum.core :as scrum]
-            [scrum.devtools.logger :as logger]
-            [scrum.devtools.ui :as dui]
             [goog.dom :as dom]
             [cognitect.transit :as t]
             [ui.core :refer [App]]
@@ -20,10 +19,6 @@
 
 ;; application state
 (def ^:private state (atom {}))
-
-(when ^boolean goog.DEBUG
-  ;(logger/attach! state)
-  (dui/mount! state (dom/getElement "debug")))
 
 ;; reconciler
 (def r
@@ -68,7 +63,8 @@
   (let [state (t/read (t/reader :json) state)] ;; read server state
     (scrum/broadcast-sync! r :init) ;; init all controllers
     (doseq [[ctrl init-state] state]
-      (scrum/dispatch-sync! r ctrl :init init-state)) ;; init controllers with server state
+      (when (not= :router ctrl)
+        (scrum/dispatch-sync! r ctrl :init init-state))) ;; init controllers with server state
     (r/start! #(scrum/dispatch! r :router :push %) routes) ;; start router
     (render) ;; render the app
     (watch-router!))) ;; watch route changes to load data on change

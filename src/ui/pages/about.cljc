@@ -1,5 +1,6 @@
 (ns ui.pages.about
-  (:require [rum.core :as rum]
+  (:require #?(:cljs [cljs.loader :as loader])
+            [rum.core :as rum]
             [scrum.core :as scrum]))
 
 (rum/defc Layout [r]
