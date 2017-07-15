@@ -44,7 +44,7 @@
 
 (rum/defc Layout < rum/reactive [r]
   (let [{:keys [descendants loading? kids] :as post}
-        (rum/react! (scrum/subscription r [:post]))]
+        (rum/react (scrum/subscription r [:post]))]
     [:main.layout.post
      (when-not loading?
        [:div.page-content

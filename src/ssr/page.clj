@@ -23,5 +23,4 @@
      [:div#debug]
      [:script {:src "/js/compiled/out-min/common.js"}]
      [:script {:src "/js/compiled/out-min/app.js"}]
-     [:script
-      (str "client.core.init_app(" (state->str state) ")")]]))
+     [:script (str "client.core.init_app(" (state->str state) ")")]]))

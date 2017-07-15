@@ -6,7 +6,7 @@
             [cognitect.transit :as t]
             [ui.core :refer [App]]
             [ui.routes :refer [routes]]
-            [client.router :as r]
+            [client.router :as cr]
             [client.effects :as effects]
             [client.controllers.router :as router]
             [client.controllers.top-posts :as top-posts]
@@ -65,6 +65,6 @@
     (doseq [[ctrl init-state] state]
       (when (not= :router ctrl)
         (scrum/dispatch-sync! r ctrl :init init-state))) ;; init controllers with server state
-    (r/start! #(scrum/dispatch! r :router :push %) routes) ;; start router
+    (cr/start! #(scrum/dispatch! r :router :push %) routes) ;; start router
     (render) ;; render the app
     (watch-router!))) ;; watch route changes to load data on change

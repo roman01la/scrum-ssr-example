@@ -20,7 +20,7 @@
 
 (rum/defc App < rum/reactive [r]
   (let [{route :handler}
-        (rum/react! (scrum/subscription r [:router]))]
+        (rum/react (scrum/subscription r [:router]))]
     [:div
      (Header links route)
      #?(:clj

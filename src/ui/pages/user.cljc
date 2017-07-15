@@ -26,7 +26,7 @@
       value)]])
 
 (rum/defc Layout < rum/reactive [r]
-  (let [user (rum/react! (scrum/subscription r [:user]))]
+  (let [user (rum/react (scrum/subscription r [:user]))]
     [:main.layout
      [:div.page-content
       [:ul.about-list
