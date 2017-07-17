@@ -1,8 +1,6 @@
 (ns client.core
   (:require [rum.core :as rum]
             [scrum.core :as scrum]
-            [scrum.devtools.logger :as logger]
-            [scrum.devtools.ui :as dui]
             [goog.dom :as dom]
             [cognitect.transit :as t]
             [ui.core :refer [App]]
@@ -20,10 +18,6 @@
 
 ;; application state
 (def ^:private state (atom {}))
-
-(when ^boolean goog.DEBUG
-  ;(logger/attach! state)
-  (dui/mount! state (dom/getElement "debug")))
 
 ;; reconciler
 (def r
