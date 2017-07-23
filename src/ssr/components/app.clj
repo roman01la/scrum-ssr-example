@@ -14,13 +14,13 @@
      :headers {"Content-Type" "text/html"}
      :body    nil}))
 
-(defrecord App [root-ui routes resolvers render-page rpc]
+(defrecord App [root-ui routes resolver render-page rpc]
   component/Lifecycle
   (start [component]
     (if (:app component)
       component
       (-> (make-handler)
-          (wrap-rum root-ui resolvers render-page)
+          (wrap-rum root-ui resolver render-page)
           (wrap-bidi routes)
           (wrap-rpc "/api" rpc)
           (transit/wrap-transit-res)
@@ -32,9 +32,9 @@
   (stop [component]
     (dissoc component :app)))
 
-(defn new-app [root-ui routes resolvers render-page rpc]
+(defn new-app [root-ui routes resolver render-page rpc]
   (map->App {:root-ui root-ui
              :routes routes
-             :resolvers resolvers
+             :resolver resolver
              :render-page render-page
              :rpc rpc}))

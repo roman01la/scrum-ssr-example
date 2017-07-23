@@ -16,7 +16,7 @@
                  [com.cognitect/transit-cljs "0.8.239"]
                  [hiccup "1.0.5"]
                  [rum "0.10.8"]
-                 [org.roman01la/scrum "2.2.0-SNAPSHOT"]
+                 [org.roman01la/scrum "2.3.0-SNAPSHOT"]
                  [bidi "2.0.17"]
                  [kibu/pushy "0.3.7"]]
 

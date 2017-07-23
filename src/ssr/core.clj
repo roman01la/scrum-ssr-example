@@ -6,17 +6,10 @@
             [ui.core :refer [App]]
             [ui.routes :refer [routes]]
             [ssr.api :as api]
-            [ssr.resolver :refer [resolver]]))
+            [ssr.resolver :refer [make-resolver]]))
 
-;; simple one-time caching per request
-(defn make-resolvers [resolver req]
-  (let [cache (volatile! {})]
-    (fn [[key & p :as path]]
-      (if-let [data (get-in @cache path)]
-        data
-        (let [data (resolver [key] req)]
-          (vswap! cache assoc key data)
-          (get-in data p))))))
+(defn resolve-subscription [make-resolver req]
+  (make-resolver req))
 
 ;; RPC API methods
 (def rpc
@@ -30,7 +23,7 @@
 
 (def system
   (component/system-map
-    :app (new-app App routes #(make-resolvers resolver %) render-page rpc)
+    :app (new-app App routes #(resolve-subscription make-resolver %) render-page rpc)
     :server (component/using
               (new-server 3000)
               [:app])))

@@ -20,9 +20,6 @@
              :href "/css/main.css"}]]
     [:body
      [:div#app content]
-     [:div#debug]
      [:script {:src "/js/compiled/bundle.js"}]
      [:script
-      (str "client.core.init_app("
-           (state->str state)
-           ")")]]))
+      (str "client.core.init_app(" (state->str state) ")")]]))

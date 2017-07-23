@@ -2,28 +2,13 @@
   (:require [clojure.core.match :refer [match]]
             [ssr.api :as api]))
 
-(defmulti resolver (fn [[key] _] key))
-
-(defmethod resolver :router [[_ & path] req]
-  (:ui/route req))
-
-(defmethod resolver :top-posts [[_ & path] req]
-  (api/top-posts (-> req :ui/route :route-params)))
-
-(defmethod resolver :new-posts [[_ & path] req]
-  (api/new-posts (-> req :ui/route :route-params)))
-
-(defmethod resolver :show-posts [[_ & path] req]
-  (api/show-posts (-> req :ui/route :route-params)))
-
-(defmethod resolver :ask-posts [[_ & path] req]
-  (api/ask-posts (-> req :ui/route :route-params)))
-
-(defmethod resolver :job-posts [[_ & path] req]
-  (api/job-posts (-> req :ui/route :route-params)))
-
-(defmethod resolver :post [[_ & path] req]
-  (api/post (-> req :ui/route :route-params)))
-
-(defmethod resolver :user [[_ & path] req]
-  (api/user (-> req :ui/route :route-params)))
+(defn make-resolver [req]
+  (let [params (-> req :ui/route :route-params)]
+    {:router     #(:ui/route req)
+     :top-posts  #(api/top-posts params)
+     :new-posts  #(api/new-posts params)
+     :show-posts #(api/show-posts params)
+     :ask-posts  #(api/ask-posts params)
+     :job-posts  #(api/job-posts params)
+     :post       #(api/post params)
+     :user       #(api/user params)}))
