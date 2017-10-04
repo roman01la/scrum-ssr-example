@@ -1,6 +1,7 @@
 (ns ui.core
   (:require [rum.core :as rum]
             [scrum.core :as scrum]
+            [sablono.util]
             [ui.header :refer [Header]]
             [ui.pages.about :as about-page]
             [ui.pages.top :as top-page]
@@ -21,7 +22,7 @@
 (rum/defc App < rum/reactive [r]
   (let [{route :handler}
         (rum/react (scrum/subscription r [:router]))]
-    [:div
+    [:div {}
      (Header links route)
      (case route
        :top (top-page/Layout r)

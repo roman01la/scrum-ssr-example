@@ -52,8 +52,10 @@
         (scrum/dispatch! r ctrl :load route-params)))))
 
 (defn render []
-  (rum/mount (App r)
-             (dom/getElement "app")))
+  (let [target (dom/getElement "app")]
+    (rum/mount (App r)
+               target
+               (aget (dom/getChildren target) 0))))
 
 (defn ^:export init-app [state]
   (let [state (t/read (t/reader :json) state)] ;; read server state

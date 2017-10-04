@@ -3,7 +3,7 @@
             [scrum.core :as scrum]))
 
 (defn- get-date []
-  #?(:clj (java.util.Date.)
+  #?(:clj  (java.util.Date.)
      :cljs (js/Date.)))
 
 (defn time-ago [ts]
@@ -24,7 +24,7 @@
 
 (rum/defc Pagination
   [{:keys [slug total current]}]
-  [:div.pagination
+  [:div.pagination {}
    (cond
      (= current 2)
      [:a {:href (str "/" (when-not (= slug "top") slug))} "< prev"]
@@ -32,21 +32,21 @@
      (> current 2)
      [:a {:href (str "/" slug "/" (dec current))} "< prev"]
 
-     :else [:a.disabled "< prev"])
-   [:span (str current "/" total)]
+     :else [:a.disabled {} "< prev"])
+   [:span {} (str current "/" total)]
    (if (< current total)
      [:a {:href (str "/" slug "/" (inc current))} "next >"]
-     [:a.disabled "next >"])])
+     [:a.disabled {} "next >"])])
 
 (rum/defc PostItem
   [{:keys [title url score by id comments time]}]
-  [:article.article-entry
-   [:header
-    [:h2 [:a {:href url} title]]]
-   [:footer
-    [:span (str score " points by ")]
+  [:article.article-entry {}
+   [:header {}
+    [:h2 {} [:a {:href url} title]]]
+   [:footer {}
+    [:span {} (str score " points by ")]
     [:a {:href (str "/user/" by)} by]
-    [:span (str " " (time-ago time) " | ")]
+    [:span {} (str " " (time-ago time) " | ")]
     [:a {:href (str "/item/" id)}
      (cond
        (nil? comments) "discuss"
